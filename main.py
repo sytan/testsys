@@ -7,27 +7,15 @@ import tornado.ioloop
 import tornado.websocket
 from tornado.options import define, options
 
+
 from routers import router
+from models import distribute
 
-'''
-To solve below issue need to modify ioloop.py of tornado:
-Traceback (most recent call last):
-  File "main.py", line 42, in <module>
-    main()
-  File "main.py", line 39, in main
-    tornado.ioloop.IOLoop.instance().sta/rt()
-  File "C:\Python27\lib\site-packages\tornado\ioloop.py", line 862, in start
-    event_pairs = self._impl.poll(poll_timeout)
-  File "C:\Python27\lib\site-packages\tornado\platform\select.py", line 63, in poll
-    self.read_fds, self.write_fds, self.error_fds, timeout)
-select.error: (10038, '')
-
-#In tornado/ioloop.py line 720,set self._timeouts = []
-#self._timeouts = None
-self._timeouts = [] #
-'''
 define("port", default=8080, help="Run on the given port", type = int)
 is_close = False
+
+distributor = distribute.Distributor()
+distributor.setDaemon(True)
 
 def signal_handler(signum, frame):
     global is_close
@@ -38,6 +26,7 @@ def exit():
     global is_close
     if is_close:
         tornado.ioloop.IOLoop.instance().stop()
+        distributor.stop()
         logging.info("exit success")
 
 def main():
@@ -48,10 +37,14 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)
     settings = {
     'static_path': os.path.join(os.path.dirname(__file__), "static"),
+    'template_path': os.path.join(os.path.dirname(__file__),"views"),
+    'debug': True, #when in developing
     }
-    app = tornado.web.Application(router.handlers,**settings)
+    app = tornado.web.Application(router.handlers, **settings)
     app.listen(options.port)
     print "Listening on port:", options.port
+
+    distributor.start()
     tornado.ioloop.PeriodicCallback(exit, 100).start()
     tornado.ioloop.IOLoop.instance().start()
 

@@ -1,12 +1,12 @@
 
 import tornado.websocket
+import json
 
 clients = []
 
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
-        print "hello, web"
-        self.render('../views/index.html')
+        self.render('index.html')
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def check_origin(self, origin):
@@ -16,11 +16,13 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print("WebSocket opened")
 
     def on_message(self, message):
-        if message == "exit":
-            signal_handler(None, None)
-
-        print 'tornado received from client: %s' % message
-        self.write_message('got it!')
+        msg = json.loads(message)
+        #if message == "exit":
+        #    signal_handler(None, None)
+        if msg.has_key('Msg') and msg.has_key('Cmd'):
+            print msg['Cmd'],msg['Msg']
+            self.write_message(message)
+        #self.write_message('got it!')
 
     def on_close(self):
         print 'connection closed'
