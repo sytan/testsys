@@ -9,13 +9,13 @@ from tornado.options import define, options
 
 
 from routers import router
-from models import distribute
+from models import mydistributor
+
 
 define("port", default=8080, help="Run on the given port", type = int)
 is_close = False
 
-distributor = distribute.Distributor()
-distributor.setDaemon(True)
+mydistributor.thread.setDaemon(True)
 
 def signal_handler(signum, frame):
     global is_close
@@ -26,7 +26,7 @@ def exit():
     global is_close
     if is_close:
         tornado.ioloop.IOLoop.instance().stop()
-        distributor.stop()
+        mydistributor.stop()
         logging.info("exit success")
 
 def main():
@@ -44,7 +44,7 @@ def main():
     app.listen(options.port)
     print "Listening on port:", options.port
 
-    distributor.start()
+    mydistributor.start()
     tornado.ioloop.PeriodicCallback(exit, 100).start()
     tornado.ioloop.IOLoop.instance().start()
 

@@ -1,0 +1,134 @@
+[
+  {
+    "instrument_1": {
+      "information": {
+        "name_ch": "数据采集卡",
+        "name_en": "DAQ",
+        "model": "DIY",
+        "id":"01",
+        "usage": "True"
+      },
+      "serial": {
+        "baudrate": "115200",
+        "bytesize": "8",
+        "parity": "N",
+        "stopbits": "1",
+        "timeout": "0",
+        "xonxoff": "False",
+        "rtscts": "False",
+        "dsrdtr": "Fasle",
+        "writetimeout": "None",
+        "interchartimeout": "None",
+        "port":"/dev/ttyUSB0",
+        "vendor_id": "2341",
+        "model_id": "003e"
+      },
+      "initialization": {
+        "command_0": {
+          "name_ch": "读取ID",
+          "name_en": "check ID",
+          "command": "~*IDN?",
+          "suffix":"\n",
+          "response": "id",
+          "exception": "error",
+          "spec": "PASS",
+          "uint": "--",
+          "timeout": "1000",
+          "delay": "0",
+          "visa": "instrument_1",
+          "pass": "command_1",
+          "fail": "none",
+          "end": "none",
+          "report": "False",
+          "database": "False",
+          "repeat": "0"
+        },
+        "command_1": {
+          "name_ch": "关电源",
+          "name_en": "Power off",
+          "command": "~stopdut",
+          "suffix":"\n",
+          "response": "dut stopped",
+          "exception": "error",
+          "spec": "PASS",
+          "uint": "--",
+          "timeout": "1000",
+          "delay": "1000",
+          "visa": "instrument_1",
+          "pass": "none",
+          "fail": "none",
+          "end": "none",
+          "report": "False",
+          "database": "False",
+          "repeat": "0"
+        }
+      }
+    }
+  },
+  {
+    "instrument_2": {
+      "information": {
+        "name_ch": "数字无绳电话测试仪",
+        "name_en": "Digital corldless telephone tester",
+        "model": "CMD60",
+        "id":"02",
+        "usage": "True"
+      },
+      "serial": {
+        "baudrate": "9600",
+        "bytesize": "8",
+        "parity": "N",
+        "stopbits": "1",
+        "timeout": "0",
+        "xonxoff": "False",
+        "rtscts": "False",
+        "dsrdtr": "Fasle",
+        "writetimeout": "None",
+        "interchartimeout": "None",
+        "port":"/dev/ttyUSB0",
+        "vendor_id": "2342",
+        "model_id": "003f"
+      },
+      "initialization": {
+        "command_0": {
+          "name_ch": "读取ID",
+          "name_en": "check ID",
+          "command": "~*IDN?",
+          "suffix":"\n",
+          "response": "id",
+          "exception": "error",
+          "spec": "PASS",
+          "uint": "--",
+          "timeout": "1000",
+          "delay": "0",
+          "visa": "instrument_1",
+          "pass": "command_1",
+          "fail": "none",
+          "end": "none",
+          "report": "False",
+          "database": "False",
+          "repeat": "0"
+        },
+        "command_1": {
+          "name_ch": "关电源",
+          "name_en": "Power off",
+          "command": "~stopdut",
+          "suffix":"\n",
+          "response": "dut stopped",
+          "exception": "error",
+          "spec": "PASS",
+          "uint": "--",
+          "timeout": "1000",
+          "delay": "1000",
+          "visa": "instrument_1",
+          "pass": "none",
+          "fail": "none",
+          "end": "none",
+          "report": "False",
+          "database": "False",
+          "repeat": "0"
+        }
+      }
+    }
+  }
+]

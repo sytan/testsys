@@ -20,12 +20,14 @@ function onMessage(data){
   var catalog = data.catalog;
   if (catalog == WEBSOCKET) {
     switch (cmd) {
-      case SHELL:
-        toShell(msg);
+      case REPORT:
+        toReport(msg);
         break;
       case CLOSE:
-        document.getElementById("input").value = msg;
+        console.log(msg);
+        alert(msg);
         break;
+        //alert(msg);
       default:
     }
   }else{
@@ -39,30 +41,37 @@ function onMessage(data){
   }
 }
 
-function toShell(msg){
-  var output = document.getElementById("output");
-  output.appendChild(document.createTextNode(msg+'\n'));
-  output.scrollTop = output.scrollHeight;
-};
-
-function onClickSubmit() {
-  var data = new Object();
-  var input = document.getElementById("input");
-  data.cmd = SHELL;
-  data.msg = input.value;
-  data.catalog = WEBSOCKET;
-
-  console.log("submit :",data);
-  //var exChangeJson = JSON.stringify(exChangeData);
-  console.log("i'm sending");
-  worker.port.postMessage(data);
-}
-
-function onEnter(evt) {
-  if(evt.keyCode == 13) {
-    onClickSubmit()
+function toReport(msg){
+  setting = msg["setting"]
+  data = msg["data"]
+  tbody = document.createElement("tbody")
+  row = document.createElement("tr");
+  for (var i in setting) {
+    key = setting[i]["data"]
+    td = document.createElement("td");
+    td.appendChild(document.createTextNode(data[key]));
+    row.appendChild(td);
   }
-};
+
+  var table = document.getElementById("testlist")
+  tbody.append(row)
+  table.append(tbody)
+  var num = table.rows.length;
+  var pageSize = 10;
+  var startRow = (num > pageSize)?num-pageSize:0;
+  var endRow = num
+
+
+  for(var i=1; i<num; i++){
+    var row = table.rows[i];
+    if(i>=startRow&&i<endRow){
+      row.style.display = "table-row";
+    }else{
+      row.style.display = "none";
+    }
+  }
+
+}
 
 function toJson(data) {
   var dataJson = data;

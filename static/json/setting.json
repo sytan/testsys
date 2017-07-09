@@ -1,0 +1,56 @@
+{
+  "device": {
+    "catalog": [
+      "/dev/ttyACM*",
+      "/dev/ttyUSB*"
+    ],
+    "id": [
+      {
+        "vendorId": "2341",
+        "modelId": "003e"
+      }
+    ]
+  },
+  "rxtune": {
+    "default_value": "C0",
+    "step": "1"
+  },
+  "tcp/ip": {
+    "timeout": "50"
+  },
+  "name": "12345",
+  "server": {
+    "host": "127.0.0.1",
+    "port": "8080"
+  },
+  "report": [
+    {
+      "header":"序 号",
+      "data":"groupId"
+    },
+    {
+      "header":"名 称",
+      "data":"groupNameCh"
+    },
+    {
+      "header":"操 作",
+      "data":"commandNameCh"
+    },
+    {
+      "header":"结 果",
+      "data":"data"
+    },
+    {
+      "header":"指 标",
+      "data":"spec"
+    },
+    {
+      "header":"单 位",
+      "data":"unit"
+    },
+    {
+      "header":"用 时",
+      "data":"commandTime"
+    }
+  ]
+}

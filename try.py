@@ -1,43 +1,27 @@
-# encoding: UTF-8
-from Queue import Queue, Empty
-from threading import Thread
 
-class EventManager:
-    #----------------------------------------------------------------------
-    def __init__(self):
-        self.eventQueue = Queue()
-        self.isActive = False
-        self.thread = Thread(target = self.run)
 
-    #----------------------------------------------------------------------
-    def run(self):
-        while self.isActive == True:
-            try:
-                event = self.eventQueue.get(block = True, timeout = 1)
-                self.eventProcess(event)
-            except Empty:
-                pass
+'''
+dut flash start
+the chip select is: 10
+The device information :
+Manufacturer ID: C2
+Device Type: 20
+Device ID: 17
+Manufacturer: MXIC
+Device type: SPI Serial Flash
+Device name: MX25L6406E
+Device size(Mbits): 64
+Page: 0x7FFF
+dut flash stopped
+'''
 
-    #----------------------------------------------------------------------
-    def eventProcess(self, event):
-        event.handler(*event.args)
 
-    #----------------------------------------------------------------------
-    def start(self):
-        self.isActive = True
-        self.thread.start()
 
-    #----------------------------------------------------------------------
-    def stop(self):
-        self.isActive = False
-        self.thread.join()
+if __name__ == "__main__":
+    script = {"age":18.125,"name":"Lily"}
+    string = """age = script.get("age")*10\nprint age+1\nif age >= 180:\n\tisTrue = True\nelse:\n\tisTrue = False"""
+    exec(string)
+    print isTrue
 
-    #----------------------------------------------------------------------
-    def addEvent(self, event):
-        self.eventQueue.put(event)
-
-"""class Event"""
-class Event():
-    def __init__(self, handler = None, args = None):
-        self.handler = handler
-        self.args = args
+    s = "ABCDEFG"
+    print s.lower()

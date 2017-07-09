@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Web terminal</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{static_url("bootstrap/css/bootstrap.min.css")}}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{static_url("css/testdetail.css")}}" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <div class="container">
+      <table class="table table-hover" id = "testlist">
+        <caption>测试细节</caption>
+        <thead>
+          <tr id = "header">
+            {%for v in reportSetting%}
+              <th>{{v["header"]}}</th>
+            {% end %}
+          </tr>
+        </thead>
+      </table>
+    </div><!-- /.container -->
+    <div>
+      <a href="/">回首页</a>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{static_url("js/jquery-3.2.1.js")}}"></script>
+    <script src="{{static_url("bootstrap/js/bootstrap.min.js")}}"></script>
+    <script src="{{static_url("js/testdetail.js")}}"></script>
+  </body>
+</html>

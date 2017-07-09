@@ -1,0 +1,126 @@
+[
+  {
+    "instrument_1": {
+      "information": {
+        "name_ch": "数据采集卡",
+        "name_en": "DAQ",
+        "model": "DIY",
+        "usage": "True"
+      },
+      "serial": {
+        "baudrate": "9600",
+        "bytesize": "8",
+        "parity": "1",
+        "stopbits": "1",
+        "timeout": "0",
+        "xonxoff": "False",
+        "rtscts": "False",
+        "dsrdtr": "Fasle",
+        "writetimeout": "None",
+        "interchartimeout": "None",
+        "vendor_id": "2341",
+        "model_id": "003e"
+      },
+      "initialization": {
+        "command_0": {
+          "name_ch": "读取ID",
+          "name_en": "check ID",
+          "command": "~*IDN?\n",
+          "response": "id",
+          "exception": "error",
+          "spec": "PASS",
+          "uint": "--",
+          "timeout": "1000",
+          "delay": "0",
+          "destination": "instrument_1",
+          "pass": "command_1",
+          "fail": "none",
+          "end": "none",
+          "report": "False",
+          "database": "False",
+          "repeat": "0"
+        },
+        "command_1": {
+          "name_ch": "关电源",
+          "name_en": "Power off",
+          "command": "~stopdut\n",
+          "response": "dut stopped",
+          "exception": "error",
+          "spec": "PASS",
+          "uint": "--",
+          "timeout": "1000",
+          "delay": "1000",
+          "destination": "instrument_1",
+          "pass": "next",
+          "fail": "none",
+          "end": "none",
+          "report": "False",
+          "database": "False",
+          "repeat": "0"
+        }
+      }
+    }
+  },
+  {
+    "instrument_2": {
+      "information": {
+        "name_ch": "数字无绳电话测试仪",
+        "name_en": "Digital corldless telephone tester",
+        "model": "CMD60",
+        "usage": "True"
+      },
+      "serial": {
+        "baudrate": "9600",
+        "bytesize": "8",
+        "parity": "1",
+        "stopbits": "1",
+        "timeout": "0",
+        "xonxoff": "False",
+        "rtscts": "False",
+        "dsrdtr": "Fasle",
+        "writetimeout": "None",
+        "interchartimeout": "None",
+        "vendor_id": "2341",
+        "model_id": "003e"
+      },
+      "initialization": {
+        "command_0": {
+          "name_ch": "读取ID",
+          "name_en": "check ID",
+          "command": "~*IDN?\n",
+          "response": "id",
+          "exception": "error",
+          "spec": "PASS",
+          "uint": "--",
+          "timeout": "1000",
+          "delay": "0",
+          "destination": "instrument_1",
+          "pass": "command_1",
+          "fail": "none",
+          "end": "none",
+          "report": "False",
+          "database": "False",
+          "repeat": "0"
+        },
+        "command_1": {
+          "name_ch": "关电源",
+          "name_en": "Power off",
+          "command": "~stopdut\n",
+          "response": "dut stopped",
+          "exception": "error",
+          "spec": "PASS",
+          "uint": "--",
+          "timeout": "1000",
+          "delay": "1000",
+          "destination": "instrument_1",
+          "pass": "next",
+          "fail": "none",
+          "end": "none",
+          "report": "False",
+          "database": "False",
+          "repeat": "0"
+        }
+      }
+    }
+  }
+]
